@@ -41,9 +41,9 @@
       <div class="col">
         <div class="p-5 sm:w-96 w-full flex flex-col justify-start items-center blue-glassmorphism" >
           <h5 style="text-align: center;">Morning</h5><hr>
-          <input style="background-color: rgb(34, 52, 90); padding: 2px;" class=" border border-gray-400 bg-gray-600" placeholder="Enter Title" name="addressTo" type="text"  /><br>
-          <input style="background-color: rgb(34, 52, 90); padding: 2px;" class="border border-gray-400 bg-gray-600" placeholder="Enter Description" name="amount" type="text"  /><br>
-          <input style="background-color: rgb(34, 52, 90); padding: 2px;" class="border border-gray-400 bg-gray-600" placeholder="Enter Time" name="keyword" type="time" /><br>
+          <input style="padding: 2px; border-radius: 8px;" class="bg-transparent outline-none border border-gray-400 bg-gray-600" placeholder="Enter Title" name="addressTo" type="text"  /><br>
+          <input style="padding: 2px; border-radius: 8px;" class="appearance-none bg-transparent outline-none border border-gray-400 bg-gray-600" placeholder="Enter Description" name="amount" type="text"  /><br>
+          <input style="padding: 2px; border-radius: 8px;" class="appearance-none bg-transparent outline-none border border-gray-400 bg-gray-600" placeholder="Enter Time" name="keyword" type="time" /><br>
           <br>
               <button
                 type="button"
@@ -71,20 +71,22 @@
         </div>
       </div>
       <div class="col">
-        <div class="p-5 sm:w-96 w-full flex flex-col justify-start items-center blue-glassmorphism" >
-          <h5 style="text-align: center;">Evening</h5><hr>
-          <input style="background-color: rgb(34, 52, 90); padding: 2px;" class=" border border-gray-400 bg-gray-600" placeholder="Enter Title" name="addressTo" type="text"  /><br>
-          <input style="background-color: rgb(34, 52, 90); padding: 2px;" class="border border-gray-400 bg-gray-600" placeholder="Enter Description" name="amount" type="number"  /><br>
-          <input style="background-color: rgb(34, 52, 90); padding: 2px;" class="border border-gray-400 bg-gray-600" placeholder="Enter Time" name="keyword" type="time" /><br>
-          <br>
-              <button
-                type="button"
-                onClick={handleSubmit}
-                style="background-color:#0b1324 ;"
-                class="btn btn-outline-light text-white w-full mt-2 border-[1px] p-2 border-[#3d4f7c] hover:bg-[#3d4f7c] rounded-full cursor-pointer">
-                Set Reminder
-              </button>
-        </div>
+        <form action="/reminderhandle" method="POST">
+          <div class="p-5 sm:w-96 w-full flex flex-col justify-start items-center blue-glassmorphism" >
+            <h5 style="text-align: center;">Evening</h5><hr>
+            <input style="background-color: rgb(34, 52, 90); padding: 2px;" class=" border border-gray-400 bg-gray-600" placeholder="Enter Title" name="title" type="text"  /><br>
+            <input style="background-color: rgb(34, 52, 90); padding: 2px;" class="border border-gray-400 bg-gray-600" placeholder="Enter Description" name="desc" type="text"  /><br>
+            <input style="background-color: rgb(34, 52, 90); padding: 2px;" class="border border-gray-400 bg-gray-600" placeholder="Enter Time" name="t" type="time" /><br>
+            <br>
+                <input
+                  type="submit"
+                  value=" Set Reminder"
+                  onClick={handleSubmit}
+                  style="background-color:#0b1324 ;"
+                  class="btn btn-outline-light text-white w-full mt-2 border-[1px] p-2 border-[#3d4f7c] hover:bg-[#3d4f7c] rounded-full cursor-pointer"/>
+          </div>
+        </form>
+        
       </div>
     </div>
   </div>

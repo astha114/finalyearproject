@@ -16,20 +16,29 @@ def home():
 
 @app.route("/reminder/")
 def reminder():
-    def send_notification():
-        # pywhatkit.sendwhatmsg("+917355287158",'test',5,54,20)
+    return render_template('reminder.html')
+##################################
+def send_notification(title='a',message='b'):
         notification.notify(
-            title="Take Medicine!",
-            message="Take your medicine on time.",
+            title=title,
+            message=message,
             timeout=5
         )
-    # send_notification()
-    schedule.every().day.at('18:07').do(send_notification)
-    while True:
-        schedule.run_pending()
-        time.sleep(1)
-        return render_template('reminder.html')
+##################################
 
+@app.route("/reminderhandle/", methods=['POST', 'GET'])
+def reminderhandle():
+    if request.method=='POST':
+        title =  request.form['title']
+        desc = request.form['desc']
+        t = request.form['t']
+        schedule.every().day.at(t).do(send_notification)
+        # while True:
+        #     schedule.run_pending()
+        #     time.sleep(1)
+        return render_template('reminderhandle.html',time=t)
+    else:
+        return render_template('reminderhandle.html')
 
 
 ########################################
@@ -160,6 +169,10 @@ def predictor2():
 @app.route("/records/", methods=['POST', 'GET'])
 def records():
     return render_template('records.html')
+
+@app.route("/findMed/", methods=['POST', 'GET'])
+def findMed():
+    return render_template('findMed.html')
 
 if __name__ == '__main__':
     app.run(port=5000)
