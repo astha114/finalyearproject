@@ -6,7 +6,7 @@ import numpy as np
 import pandas as pd
 
 import wikipedia
-# import pywhatkit
+import mysql.connector
 
 app = Flask(__name__)
 
@@ -165,14 +165,33 @@ def predictor2():
         else:
             return render_template('predictor2.html', ans='No results')
 
-
 @app.route("/records/", methods=['POST', 'GET'])
 def records():
     return render_template('records.html')
 
-@app.route("/findMed/", methods=['POST', 'GET'])
+
+@app.route("/findMed/")
 def findMed():
-    return render_template('findMed.html')
+    mydb = mysql.connector.connect(host="localhost", user="root",passwd="root", database="hms",auth_plugin='mysql_native_password')
+    mycursor = mydb.cursor()
+    mycursor.execute("select * from medicine")
+    ans = mycursor.fetchall()
+    return render_template('findMed.html',ans=ans)
+
+@app.route("/Extra/")
+def Extra():
+    return render_template('Extra.html')
+
+@app.route("/searchResult/", methods=['POST', 'GET'])
+def searchResult():
+    if request.method == 'POST':
+        squery = request.form['sq']
+        mydb = mysql.connector.connect(host="localhost", user="root",passwd="root", database="hms",auth_plugin='mysql_native_password')
+        mycursor = mydb.cursor()
+        print(squery)
+        mycursor.execute(f"select * from medicine where match (`name`) against ('{squery}')")
+        ans = mycursor.fetchall()
+    return render_template('searchResult.html', x = ans)
 
 if __name__ == '__main__':
-    app.run(port=5000)
+    app.run(debug=True)
